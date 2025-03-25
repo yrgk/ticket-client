@@ -1,0 +1,30 @@
+h2, h3 {
+    color: var(--tg-theme-text-color);
+}
+
+.qr-code-screen {
+    margin: 5%;
+    text-align: center;
+    /* background-color: gray; */
+}
+
+.qr-code-block {
+    border-radius: 11%;
+    background-color: var(--tg-theme-bg-color);
+    margin: auto;
+    margin-bottom: 3vh;
+    width: 80vw;
+    padding: 10px;
+}
+
+div.qr-code-block>img {
+    display: block;
+}
+
+#qr-code {
+    border-radius: 10%;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    object-fit: cover;
+}
