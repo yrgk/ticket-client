@@ -1,0 +1,21 @@
+.form-screen {
+    width: 90vw;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.form-block {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+    margin-top: 10%;
+}
+
+.form-input {
+    background-color: var(--tg-theme-bg-color);
+    border: none;
+    border-radius: 5px;
+    line-height: 3rem;
+    margin-bottom: 5%;
+    padding-left: 10px;
+}

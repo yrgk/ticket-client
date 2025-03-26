@@ -6,6 +6,7 @@ import './App.css'
 import Ticket from './components/Ticket/Ticket'
 import CheckTicket from './components/CheckTicket/CheckTicket';
 import Successful from './components/Successful/Successful';
+import Form from './components/Form/Form';
 
 function App() {
     const tg = WebApp
@@ -20,7 +21,7 @@ function App() {
             {/* <Route index element={<h1>Main page</h1>}/> */}
 
             {/* Watching ticket */}
-            <Route index element={<Successful/>}/>
+            <Route index element={<Form/>}/>
             {/* <Route path='ticket/:id' element={<Ticket/>}/> */}
 
             {/* Camera */}
