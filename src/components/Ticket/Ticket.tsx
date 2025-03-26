@@ -24,8 +24,8 @@ function Ticket() {
                 <img id="qr-code" src="https://storage.yandexcloud.net/ticket-bucket/123456789122024-12-17%2019%3A21%3A00.493884%20%2B0300%20MSK%20m%3D%2B60.649606917" alt="" />
             </div>
 
-            <h3>Gorillaz "Humanz Tour" - Concert in Berlin</h3>
-            <h2>Standard</h2>
+            <h3 id='main-text'>Gorillaz "Humanz Tour" - Concert in Berlin</h3>
+            <h2 id='main-text'>Standard</h2>
         </div>
     )
 }

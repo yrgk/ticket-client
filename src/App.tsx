@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 import './App.css'
 import Ticket from './components/Ticket/Ticket'
+import CheckTicket from './components/CheckTicket/CheckTicket';
+import Successful from './components/Successful/Successful';
 
 function App() {
     const tg = WebApp
@@ -18,11 +20,15 @@ function App() {
             {/* <Route index element={<h1>Main page</h1>}/> */}
 
             {/* Watching ticket */}
-            <Route index element={<Ticket/>}/>
+            <Route index element={<Successful/>}/>
             {/* <Route path='ticket/:id' element={<Ticket/>}/> */}
 
+            {/* Camera */}
+
+
             {/* Checking ticket */}
-            <Route path='ticket/check' element={<Ticket/>}/>
+            {/* <Route path='ticket/check' element={<CheckTicket/>}/> */}
+            {/* <Route index element={<CheckTicket/>}/> */}
 
             {/* Watching event page */}
             <Route path='event/:id' element={<Ticket/>}/>

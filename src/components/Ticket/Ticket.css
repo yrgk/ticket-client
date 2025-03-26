@@ -1,11 +1,10 @@
-h2, h3 {
+#main-text {
     color: var(--tg-theme-text-color);
 }
 
 .qr-code-screen {
     margin: 5%;
     text-align: center;
-    /* background-color: gray; */
 }
 
 .qr-code-block {
