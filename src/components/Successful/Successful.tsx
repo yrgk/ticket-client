@@ -4,15 +4,18 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import './Successful.css'
 import WebApp from "@twa-dev/sdk";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Successful() {
     const tg = WebApp;
+    const navigate = useNavigate();
 
     tg.MainButton.show();
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', function() {
             tg.HapticFeedback.impactOccurred('light')
+            navigate("/ticket/1")
         })
     }, []);
 
@@ -30,6 +33,7 @@ function Successful() {
                         autoplay
                     />
                 </div>
+
                 <h1 id='main-text'>Успешно!</h1>
                 <h3 id='main-text'>Gorillaz "Humanz Tour" - Concert in Berlin</h3>
                 <h3 id='main-text'>Standard</h3>
