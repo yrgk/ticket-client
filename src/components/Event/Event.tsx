@@ -2,6 +2,8 @@ import WebApp from '@twa-dev/sdk';
 import './Event.css'
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import ImageSegment from '../Segments/ImageSegment';
+import TextSegment from '../Segments/TextSegment';
 
 function Event() {
     const tg = WebApp;
@@ -14,13 +16,16 @@ function Event() {
               "type": "image",
               "url": "https://drupal-prod.visitcalifornia.com/sites/default/files/styles/opengraph_1200x630/public/2023-05/VC_Music-Festivals_Outside-Lands_SUPPLIED_1280x640.jpg.webp?itok=ehtxDYFF",
               "subtitle": "Главное музыкальное событие этого лета",
-              "color": "#FFFFFF",
+              "alignment": "center",
+              // "margin": "5%",
+              // "rounding": "5px",
               "background_color": "#000000"
             },
             {
               "type": "text",
               "text": "Summer Sound Festival 2025 – это три дня живой музыки, лучших артистов и атмосферы свободы!",
-              "size": "18",
+              "size": "150%",
+              "weight": 300,
               "color": "#FFFFFF",
               "background_color": "#1A1A1A"
             },
@@ -141,22 +146,34 @@ function Event() {
     return (
         <>
         <h1>Event</h1>
-        {/* {response.map(segment => {
+        {/* {response.map(segment => (
             <h1>{segment.type}</h1>
-            // if (segment.type == "image") {
-                // ImageSegment(segment.url)
-            // }
-        })} */}
-        {response.map(segment => <h1>{segment.type}</h1>)}
+            {segment.type === "image" && }
+        ))} */}
+        {/* {response.map(segment => (
+            <div key={segment.type}>
+                <h1>{segment.type}</h1>
+                {segment.type === "image" &&
+                    <ImageSegment
+                        url={segment.url ?? ""}
+                        margin={segment.margin ?? ""}
+                        alignment={segment.alignment ?? ""}
+                        rounding={segment.rounding ?? ""}
+                    />
+                }
+
+                {segment.type === "text" &&
+                    <TextSegment
+                        text={segment.text ?? ""}
+                        size={segment.size ?? ""}
+                    />
+                }
+
+            </div>
+        ))} */}
+        {/* {response.map(segment => <h1>{segment.type}</h1>)} */}
         </>
     )
 }
 
 export default Event
-
-
-// function ImageSegment(url: string) {
-//     return (
-//         <img src={url} alt="" />
-//     )
-// }

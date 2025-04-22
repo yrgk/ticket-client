@@ -1,14 +1,15 @@
-import WebApp from '@twa-dev/sdk'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import WebApp from '@twa-dev/sdk';
 import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import './App.css'
-import Ticket from './components/Ticket/Ticket'
-import CheckTicket from './components/CheckTicket/CheckTicket';
-import Event from './components/Event/Event'
-import Successful from './components/Successful/Successful';
-import Form from './components/Form/Form';
+import './App.css';
 import Camera from './components/Camera/Camera';
+import CheckTicket from './components/CheckTicket/CheckTicket';
+import CreateForm from './components/CreateForm/CreateForm';
+import Event from './components/Event/Event';
+import Form from './components/Form/Form';
+import Successful from './components/Successful/Successful';
+import Ticket from './components/Ticket/Ticket';
 
 function App() {
     const tg = WebApp
@@ -20,7 +21,6 @@ function App() {
     return (
         <BrowserRouter>
         <Routes>
-            {/* <Route index element={<h1>Main page</h1>}/> */}
             <Route index element={<Event/>}/>
 
             {/* Watching ticket */}
@@ -35,8 +35,12 @@ function App() {
             {/* Watching event page */}
             <Route path='event/:id' element={<Event/>}/>
 
-            {/* Signing up to event */}
-            <Route path='form/:id' element={<Form/>}/>
+            {/* Make form */}
+            <Route path='form/make' element={<CreateForm/>}/>
+
+            {/* Watching form */}
+            {/* <Route path='form/:id' element={<Form/>}/> */}
+            <Route index element={<Form/>}/>
 
             {/* Choose a book */}
             <Route path='schedule/:id' element={<Successful/>}/>

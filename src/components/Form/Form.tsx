@@ -9,23 +9,79 @@ function Form() {
     const navigate = useNavigate();
     const [fields, setFields] = useState<FormProps[]>([])
 
-    const response = [
+    const response = {
+        title: "Регистрация на хакатон 6 мая в IT-парке им. Башира Рамеева",
+        fields: [
+            {
+                name: "Название команды",
+                type: "text",
+            },
+            {
+                name: "Количество участников",
+                type: "number",
+            },
+            {
+                name: "Направление",
+                type: "text",
+            },
+            {
+                name: "Telegram для контактов",
+                type: "text",
+            },
+        ]
+    }
+
+    const response1 = {
+        title: "Мастер класс по лепке из глины",
+        fields: [
+            {
+                "name": "Имя",
+                "type": "text"
+            },
+            {
+                "name": "Телефон",
+                "type": "tel"
+            },
+            {
+                "name": "Email",
+                "type": "email"
+            },
+            {
+                "name": "Уровень подготовки",
+                "type": "select"
+            }
+        ]
+    }
+
+    const response2 = [
         {
-            name: "Электронная почта",
-            type: "email",
+            "name": "Имя",
+            "type": "text"
         },
         {
-            name: "Никнейм",
-            type: "text",
+            "name": "Телефон",
+            "type": "tel"
         },
         {
-            name: "ELO",
-            type: "number",
+            "name": "Email",
+            "type": "email"
         },
         {
-            name: "Игра",
-            type: "text",
+            "name": "Дата и время аренды",
+            "type": "datetime-local"
         },
+        {
+            "name": "Длительность (в часах)",
+            "type": "number"
+        },
+        {
+            "name": "Нужны ли осветительные приборы?",
+            "type": "checkbox"
+        },
+        {
+            "name": "Комментарий",
+            "type": "textarea"
+        }
     ]
 
 
@@ -39,7 +95,7 @@ function Form() {
     tg.BackButton.show()
 
     useEffect(() => {
-        setFields(response)
+        setFields(response.fields)
         tg.onEvent('mainButtonClicked', function() {
             tg.HapticFeedback.impactOccurred('light')
             // !!!! ADD CHECKING IF EMPTY
@@ -54,7 +110,7 @@ function Form() {
 
     return (
         <div className='form-screen'>
-            <h2 id="main-text">Турнир по киберспорту среди юнош до 21 года в Казани 19 апреля 2025 года</h2>
+            <h2 id="main-text">{response.title}</h2>
 
             <div className="form-block">
                 {fields.map((field) => (

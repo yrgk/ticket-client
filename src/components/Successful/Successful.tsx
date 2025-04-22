@@ -28,7 +28,7 @@ function Successful() {
             <div className="successful-block">
                 <div className="emoji">
                     <DotLottieReact
-                        src="public\small_OUT.json"
+                        src="/small_OUT.json"
                         loop
                         autoplay
                     />
