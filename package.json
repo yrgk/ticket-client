@@ -14,9 +14,11 @@
     "@lottiefiles/lottie-player": "^2.0.12",
     "@telegram-apps/sdk": "^3.5.3",
     "@twa-dev/sdk": "^8.0.2",
+    "axios": "^1.9.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^6.30.0"
+    "react-router-dom": "^6.30.0",
+    "tailwind": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

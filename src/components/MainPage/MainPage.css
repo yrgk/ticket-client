@@ -1,0 +1,121 @@
+.home-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+
+  .home-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .home-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .home-header p {
+    color: #666;
+  }
+
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .action-card {
+    background: #f9f9f9;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    transition: background 0.2s ease;
+  }
+
+  .action-card:hover {
+    background: #f1f1f1;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+
+  .event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .event-item {
+    background: #f0f4ff;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d0d8f0;
+  }
+
+  .event-item span {
+    display: block;
+    color: #555;
+    font-size: 0.9rem;
+  }
+
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .template-card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  .template-card h4 {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+  }
+
+  .template-card p {
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  .pro-block {
+    text-align: center;
+    background: #fff7e0;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #f0db92;
+  }
+
+  .pro-button {
+    margin-top: 12px;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+
+  .pro-button:hover {
+    background: #333;
+  }
+
+  .home-footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 40px;
+  }

@@ -3,10 +3,8 @@ import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import Camera from './components/Camera/Camera';
 import CheckTicket from './components/CheckTicket/CheckTicket';
 import CreateForm from './components/CreateForm/CreateForm';
-import Event from './components/Event/Event';
 import Form from './components/Form/Form';
 import Successful from './components/Successful/Successful';
 import Ticket from './components/Ticket/Ticket';
@@ -29,7 +27,7 @@ function App() {
             <Route path='projects/my' element={<MainPage/>}/>
 
             {/* Watching ticket */}
-            <Route path='ticket/:id' element={<Ticket/>}/>
+            <Route path='ticket/:ticketId' element={<Ticket/>}/>
 
             {/* Checking ticket */}
             <Route path='ticket/check' element={<CheckTicket/>}/>
@@ -38,8 +36,7 @@ function App() {
             <Route path='form/create' element={<CreateForm/>}/>
 
             {/* Watching form */}
-            {/* <Route path='form/:id' element={<Form/>}/> */}
-            <Route index element={<Form/>}/>
+            <Route path='form/:formId' element={<Form/>}/>
 
             {/* Succesful page */}
             <Route path='success' element={<Successful/>}/>

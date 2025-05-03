@@ -1,88 +1,15 @@
-import { useEffect, useState } from 'react';
-import './Form.css'
 import WebApp from '@twa-dev/sdk';
-import { useNavigate } from 'react-router-dom';
-import { FormProps } from '../../types/FormProps';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { FormResponse } from '../../types/FormProps';
+import FetchForm from '../../utils/formFetches';
+import './Form.css';
 
 function Form() {
     const tg = WebApp;
+    const { formId } = useParams();
     const navigate = useNavigate();
-    const [fields, setFields] = useState<FormProps[]>([])
-
-    const response = {
-        title: "Регистрация на хакатон 6 мая в IT-парке им. Башира Рамеева",
-        fields: [
-            {
-                name: "Название команды",
-                type: "text",
-            },
-            {
-                name: "Количество участников",
-                type: "number",
-            },
-            {
-                name: "Направление",
-                type: "text",
-            },
-            {
-                name: "Telegram для контактов",
-                type: "text",
-            },
-        ]
-    }
-
-    const response1 = {
-        title: "Мастер класс по лепке из глины",
-        fields: [
-            {
-                "name": "Имя",
-                "type": "text"
-            },
-            {
-                "name": "Телефон",
-                "type": "tel"
-            },
-            {
-                "name": "Email",
-                "type": "email"
-            },
-            {
-                "name": "Уровень подготовки",
-                "type": "select"
-            }
-        ]
-    }
-
-    const response2 = [
-        {
-            "name": "Имя",
-            "type": "text"
-        },
-        {
-            "name": "Телефон",
-            "type": "tel"
-        },
-        {
-            "name": "Email",
-            "type": "email"
-        },
-        {
-            "name": "Дата и время аренды",
-            "type": "datetime-local"
-        },
-        {
-            "name": "Длительность (в часах)",
-            "type": "number"
-        },
-        {
-            "name": "Нужны ли осветительные приборы?",
-            "type": "checkbox"
-        },
-        {
-            "name": "Комментарий",
-            "type": "textarea"
-        }
-    ]
+    const [form, setForm] = useState<FormResponse | null>(null)
 
 
     // Main Button setting
@@ -91,34 +18,48 @@ function Form() {
         text: `Отправить`
     });
 
-    // Back Button setting
-    tg.BackButton.show()
-
     useEffect(() => {
-        setFields(response.fields)
+        // Loading form
+        const loadForm = async () => {
+            if (formId) {
+                const data = await FetchForm(formId);
+                if (data) {
+                    setForm(data);
+                }
+            }
+        };
+        loadForm();
+
+        // Adding main button for getting a ticket
         tg.onEvent('mainButtonClicked', function() {
             tg.HapticFeedback.impactOccurred('light')
             // !!!! ADD CHECKING IF EMPTY
             navigate("/success")
         })
 
-        tg.onEvent('backButtonClicked', function() {
-            tg.HapticFeedback.impactOccurred('light')
-            navigate(-1)
-        })
-    }, []);
+    }, [formId]);
 
     return (
-        <div className='form-screen'>
-            <h2 id="main-text">{response.title}</h2>
+        form ? (
+            <div className='form-screen'>
+                <h2 id="main-text">{form.title}</h2>
 
-            <div className="form-block">
-                {fields.map((field) => (
-                    <input className="form-input" type={field.type} placeholder={field.name}/>
-                ))}
+                <div className="form-block">
+                    {form.fields.map((field, index) => (
+                        <input
+                            key={index}
+                            className="form-input"
+                            type={field.type}
+                            placeholder={field.name}
+                            required
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
-    )
+        ) : (
+            <h1>Loading</h1> // Change
+        )
+    );
 }
 
-export default Form
+export default Form;

@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 function CheckTicket() {
     const tg = WebApp;
 
+    // const validatorId = Number(tg.initDataUnsafe.)
+
     tg.MainButton.show();
 
     useEffect(() => {

@@ -1,18 +1,38 @@
 import WebApp from '@twa-dev/sdk'
 import './Ticket.css'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { TicketResponse } from '../../types/Ticket';
+import { FetchTicket } from '../../utils/ticketFetches';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 function Ticket() {
     const tg = WebApp;
+    const { ticketId } = useParams();
+    const [ queryParams ] = useSearchParams();
+
+    const userId = Number(queryParams.get("user_id"))
+
+    const [ticket, setTicket] = useState<TicketResponse>()
 
     tg.MainButton.show();
 
     useEffect(() => {
+        const loadTicket = async () => {
+            if (ticketId) {
+                const data = await FetchTicket(ticketId, userId)
+                if (data) {
+                    setTicket(data)
+                }
+            }
+        }
+        loadTicket();
+
         tg.onEvent('mainButtonClicked', function() {
             tg.HapticFeedback.impactOccurred('light')
             tg.close()
         })
-    }, []);
+
+    }, [ticketId]);
 
     tg.MainButton.setParams({
         text: `Закрыть`
@@ -21,11 +41,11 @@ function Ticket() {
     return (
         <div className="qr-code-screen">
             <div className="qr-code-block">
-                <img id="qr-code" src="https://storage.yandexcloud.net/ticket-bucket/123456789122024-12-17%2019%3A21%3A00.493884%20%2B0300%20MSK%20m%3D%2B60.649606917" alt="" />
+                <img id="qr-code" src={ticket?.qr_code_url} alt="" />
             </div>
 
-            <h3 id='main-text'>Gorillaz "Humanz Tour" - Concert in Berlin</h3>
-            <h2 id='main-text'>Standard</h2>
+            <h3 id='main-text'>{ticket?.title}</h3>
+            <h4 id='main-text'>{ticket?.variety}</h4>
         </div>
     )
 }
