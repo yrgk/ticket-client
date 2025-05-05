@@ -21,7 +21,7 @@ function App() {
         <BrowserRouter>
         <Routes>
             {/* Main page */}
-            <Route index element={<MainPage/>}/>
+            {/* <Route index element={<MainPage/>}/> */}
 
             {/* My projects page */}
             <Route path='projects/my' element={<MainPage/>}/>
@@ -33,7 +33,8 @@ function App() {
             <Route path='ticket/check' element={<CheckTicket/>}/>
 
             {/* Make form */}
-            <Route path='form/create' element={<CreateForm/>}/>
+            {/* <Route path='form/create' element={<CreateForm/>}/> */}
+            <Route index element={<CreateForm/>}/>
 
             {/* Watching form */}
             <Route path='form/:formId' element={<Form/>}/>

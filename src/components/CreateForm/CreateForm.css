@@ -1,0 +1,193 @@
+/* .create-form-screen {
+    margin: 5%;
+    text-align: center;
+}
+
+.form-screen {
+    width: 90vw;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.form-block {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+    max-width: 500px;
+    margin-top: 10%;
+}
+
+.form-input {
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    border: none;
+    border-radius: 5px;
+    line-height: 2rem;
+    margin-bottom: 5%;
+    padding-left: 10px;
+}
+
+.form-input::placeholder {
+    color: var(--tg-theme-text-color);
+}
+
+.field-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: var(--tg-theme-bg-color);
+    border: 1px solid var(--tg-theme-hint-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.name-field,
+.select-type {
+    padding: 10px 12px;
+    font-size: 14px;
+    color: var(--tg-theme-text-color);
+    background-color: var(--tg-theme-secondary-bg-color);
+    border: 1px solid var(--tg-theme-hint-color);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.name-field:focus,
+.select-type:focus {
+    border-color: var(--tg-theme-button-color);
+}
+
+.select-type {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23666' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    padding-right: 36px;
+} */
+
+
+  /* Общий контейнер */
+  .create-form-screen {
+      padding: 16px;
+      background-color: var(--tg-theme-bg-color);
+      color: var(--tg-theme-text-color);
+      min-height: 100vh;
+  }
+
+  /* Заголовок страницы */
+  .create-form-screen h1 {
+      font-size: 22px;
+      margin-bottom: 16px;
+      color: var(--tg-theme-text-color);
+  }
+
+  /* Заголовки секций */
+  .create-form-screen h4 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: var(--tg-theme-hint-color);
+  }
+
+  /* Блок с основной информацией */
+  .form-block {
+      display: flex;
+      flex-direction: column;
+      padding-left: 16px;
+      padding-right: 16px;
+      background-color: var(--tg-theme-secondary-bg-color);
+      border-radius: 12px;
+      margin-bottom: 20px;
+  }
+
+  /* Поля ввода формы */
+  .form-input {
+      font-size: 14px;
+      color: var(--tg-theme-text-color);
+      background-color: var(--tg-theme-bg-color);
+      border-radius: 15px;
+      outline: none;
+      /* transition: border-color 0.2s; */
+  }
+
+  .form-input:focus {
+      border-color: var(--tg-theme-button-color);
+  }
+
+  /* Блок с полями */
+  .fields {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+  }
+
+  /* Один блок поля */
+  .field-block {
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      background-color: var(--tg-theme-secondary-bg-color);
+      border-radius: 12px;
+  }
+
+  /* Поле названия */
+  .name-field {
+      font-size: 14px;
+      color: var(--tg-theme-text-color);
+      background-color: var(--tg-theme-bg-color);
+      border-radius: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+  }
+
+  /* .name-field:focus {
+      border-color: var(--tg-theme-button-color);
+  } */
+
+  /* Селект */
+  .select-type {
+        padding: 10px 12px;
+        font-size: 14px;
+        height: 3rem;
+        color: var(--tg-theme-text-color);
+        background-color: var(--tg-theme-bg-color);
+        border: none;
+        border-radius: 8px;
+        outline: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='%23666' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 16px;
+        padding-right: 36px;
+    }
+
+  /* .select-type:focus {
+      border-color: var(--tg-theme-button-color);
+  } */
+
+  /* Кнопка добавить */
+  .add-field {
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      width: 100%;
+      background-color: var(--tg-theme-button-color);
+      color: var(--tg-theme-button-text-color);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+  }
+
+  .add-field:hover {
+      opacity: 0.95;
+  }
+
+  .add-field:active {
+      opacity: 0.85;
+  }
