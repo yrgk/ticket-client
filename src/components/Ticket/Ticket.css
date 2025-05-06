@@ -2,6 +2,24 @@
     color: var(--tg-theme-text-color);
 }
 
+#activated {
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    width: fit-content;
+    margin: auto;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+#not-activated {
+    background-color: var(--tg-theme-destructive-text-color);
+    color: var(--tg-theme-button-text-color);
+    width: fit-content;
+    margin: auto;
+    padding: 7px;
+    border-radius: 10px;
+}
+
 .qr-code-screen {
     margin: 5%;
     text-align: center;
@@ -10,11 +28,21 @@
 .qr-code-block {
     border-radius: 11%;
     background-color: var(--tg-theme-bg-color);
+    display: flex;
+    vertical-align: middle;
+    text-align: center;
     margin: auto;
     margin-bottom: 3vh;
-    width: 80vw;
+    width: 70vw;
+    max-width: 350px;
     padding: 10px;
+    aspect-ratio: 1 / 1;
 }
+
+.img-activated {
+    margin: auto;
+}
+
 
 div.qr-code-block>img {
     display: block;

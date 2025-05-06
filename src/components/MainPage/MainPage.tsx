@@ -5,10 +5,11 @@ import './MainPage.css';
 
 function MainPage() {
     const tg = WebApp;
+    const userId = tg.initDataUnsafe.user?.id
     const navigate = useNavigate();
+    const startParam = tg.initDataUnsafe?.start_param ?? "";
 
     useEffect(() => {
-        const startParam = tg.initDataUnsafe?.start_param ?? "";
 
         if (startParam) {
             const startData = startParam.split("_");
@@ -18,10 +19,10 @@ function MainPage() {
                     navigate(`/form/${startData[1]}`);
                     break;
                 case "ticket":
-                    navigate(`/ticket/${startData[1]}`);
+                    navigate(`/ticket/${startData[1]}?user_id=${userId}`);
                     break;
                 case "check":
-                    navigate(`/check/${startData[1]}`);
+                    navigate(`/ticket/check/${startData[1]}`);
                     break;
                 default:
                     break;
@@ -34,6 +35,7 @@ function MainPage() {
           {/* Заголовок */}
           <header className="home-header">
             <h1>Vellem</h1>
+            <h1>{startParam}</h1>
             <p>Управляй регистрациями, бронированиями и билетами прямо в Telegram</p>
           </header>
 

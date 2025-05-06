@@ -1,17 +1,9 @@
 import './CreateForm.css';
 
-// function CreateForm() {
-//     return (
-//         <>
-//         </>
-//     )
-// }
-
-// export default CreateForm;
 
 import WebApp from '@twa-dev/sdk';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type FieldType = 'string' | 'number' | 'email' | 'checkbox';
@@ -21,16 +13,17 @@ interface Field {
   type: FieldType;
 }
 
-const FormBuilder: React.FC = () => {
+function CreateForm() {
     const tg = WebApp;
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [fields, setFields] = useState<Field[]>([]);
     const [participantsLimit, setParticipantsLimit] = useState(0);
-    const userId = Number(tg.initDataUnsafe.user?.first_name)
+    const userId = tg.initDataUnsafe.user?.id
 
     const handleAddField = () => {
         setFields([...fields, { name: '', type: 'string' }]);
+        tg.HapticFeedback.impactOccurred('light');
     };
 
     const handleFieldChange = (index: number, key: keyof Field, value: string) => {
@@ -39,7 +32,7 @@ const FormBuilder: React.FC = () => {
         setFields(updatedFields);
     };
 
-    async function handleSubmit() {
+    const handleSubmit = useCallback(async () => {
         const payload = {
             title,
             fields,
@@ -49,44 +42,37 @@ const FormBuilder: React.FC = () => {
 
         try {
             const response = await axios.post('https://vellem.catalogio.space/api/v1/form', payload);
-            if (response.status != 200) {
-                return false
-            } else {
-                return true
-            }
+            return response.status === 200;
         } catch (error) {
             console.error(error);
-            alert(error)
-            return false
+            alert(error);
+            return false;
         }
-    };
+    }, [title, fields, userId, participantsLimit]);
 
     useEffect(() => {
+        tg.ready();
+
+        // Main button initializing
+        tg.MainButton.setText("Создать")
+        tg.MainButton.show();
+
         const handleClick = async () => {
-            tg.HapticFeedback.impactOccurred('light');
+            tg.HapticFeedback.impactOccurred('medium');
             const isSuccessful = await handleSubmit();
             if (isSuccessful) {
                 navigate("/success");
             } else {
-                tg.showAlert("Что-то пошло не так, попробуйте позже")
+                tg.showAlert("Что-то пошло не так, попробуйте позже");
             }
         };
 
         tg.onEvent('mainButtonClicked', handleClick);
-
-        return () => {
-            tg.offEvent('mainButtonClicked', handleClick);
-        };
-    }, []);
-
-    // Main button initializing
-    tg.MainButton.show();
-    tg.MainButton.setText("Создать")
+        return () => tg.offEvent('mainButtonClicked', handleClick);
+    }, [handleSubmit]);
 
     return (
         <div className="create-form-screen">
-            <h1>id:</h1>
-            <h1>{userId}</h1>
             <h1>Создание формы</h1>
 
             <div className="form-block">
@@ -95,6 +81,7 @@ const FormBuilder: React.FC = () => {
                     className="form-input"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    style={{backgroundColor: tg.themeParams.secondary_bg_color}}
                 />
 
                 <h4>Лимит регистраций</h4>
@@ -103,44 +90,44 @@ const FormBuilder: React.FC = () => {
                     className="form-input"
                     placeholder="Лимит участников"
                     value={participantsLimit}
+                    style={{backgroundColor: tg.themeParams.secondary_bg_color}}
                     onChange={(e) => setParticipantsLimit(Number(e.target.value))}
                 />
             </div>
 
-        <div className="fields">
-            {fields.map((field, index) => (
-                <div key={index} className="field-block">
-                    <input
-                        // className="name-field"
-                        className="form-input"
-                        placeholder="Название поля"
-                        value={field.name}
-                        onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
-                    />
+            <div className="fields">
+                {fields.map((field, index) => (
+                    <div key={index} className="field-block">
+                        <input
+                            className="form-input"
+                            placeholder="Название поля"
+                            value={field.name}
+                            style={{backgroundColor: tg.themeParams.secondary_bg_color}}
+                            onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
+                        />
 
-                    <select
-                        className="select-type"
-                        // className="form-input"
-                        value={field.type}
-                        onChange={(e) => handleFieldChange(index, 'type', e.target.value)}
-                    >
-                        <option value="string">Строка</option>
-                        <option value="number">Число</option>
-                        <option value="email">Email</option>
-                        <option value="checkbox">Флажок</option>
-                    </select>
-                </div>
-            ))}
-        </div>
+                        <select
+                            className="select-type"
+                            value={field.type}
+                            onChange={(e) => handleFieldChange(index, 'type', e.target.value)}
+                        >
+                            <option value="string">Строка</option>
+                            <option value="number">Число</option>
+                            <option value="email">Email</option>
+                            <option value="checkbox">Флажок</option>
+                        </select>
+                    </div>
+                ))}
+            </div>
 
-        <button
-            className="add-field"
-            onClick={handleAddField}
-        >
-            Добавить поле
-        </button>
+            <button
+                className="add-field"
+                onClick={handleAddField}
+            >
+                Добавить поле
+            </button>
         </div>
     );
 };
 
-export default FormBuilder;
+export default CreateForm;

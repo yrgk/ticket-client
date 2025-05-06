@@ -4,6 +4,7 @@ export type FormProps = {
 }
 
 export type FormResponse = {
+    id: number;
     [x: string]: any;
     title: string;
     fields: {

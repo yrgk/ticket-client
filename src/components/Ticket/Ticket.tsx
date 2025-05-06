@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { TicketResponse } from '../../types/Ticket';
 import { FetchTicket } from '../../utils/ticketFetches';
 import { useParams, useSearchParams } from 'react-router-dom';
+import Loading from '../Loading/Loading';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 function Ticket() {
     const tg = WebApp;
@@ -28,7 +30,7 @@ function Ticket() {
         loadTicket();
 
         tg.onEvent('mainButtonClicked', function() {
-            tg.HapticFeedback.impactOccurred('light')
+            tg.HapticFeedback.impactOccurred('medium')
             tg.close()
         })
 
@@ -38,16 +40,35 @@ function Ticket() {
         text: `Закрыть`
     });
 
-    return (
+    return ticket ? (
         <div className="qr-code-screen">
             <div className="qr-code-block">
-                <img id="qr-code" src={ticket?.qr_code_url} alt="" />
+                {
+                    ticket.is_activated ?
+                        <div className="img-activated">
+                            <DotLottieReact
+                                className='image-check'
+                                src="/_069_007_pen_OUT.json"
+                                loop
+                                autoplay
+                            />
+                        </div>
+                    :
+                        <img id="qr-code" src={ticket?.qr_code_url} alt="" />
+                }
             </div>
-
+            {
+                ticket.is_activated ?
+                    <h4 id='activated'>Активирован</h4>
+                :
+                    <h4></h4>
+            }
             <h3 id='main-text'>{ticket?.title}</h3>
-            <h4 id='main-text'>{ticket?.variety}</h4>
+            <h3 id='main-text'>{ticket?.variety}</h3>
         </div>
-    )
+    ) : (
+        <Loading/>
+    );
 }
 
 export default Ticket

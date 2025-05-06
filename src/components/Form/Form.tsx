@@ -1,25 +1,25 @@
 import WebApp from '@twa-dev/sdk';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormResponse } from '../../types/FormProps';
 import FetchForm from '../../utils/formFetches';
 import './Form.css';
+import { TakeTicket } from '../../utils/ticketFetches';
+import Loading from '../Loading/Loading';
 
 function Form() {
     const tg = WebApp;
     const { formId } = useParams();
     const navigate = useNavigate();
-    const [form, setForm] = useState<FormResponse | null>(null)
+    const [form, setForm] = useState<FormResponse | null>(null);
+    const [formData, setFormData] = useState<{ [key: string]: string }>({});
 
 
-    // Main Button setting
-    tg.MainButton.show();
-    tg.MainButton.setParams({
-        text: `Отправить`
-    });
-
+    // Loading form
     useEffect(() => {
-        // Loading form
+        tg.MainButton.show();
+        tg.MainButton.setParams({ text: "Отправить" });
+
         const loadForm = async () => {
             if (formId) {
                 const data = await FetchForm(formId);
@@ -29,36 +29,74 @@ function Form() {
             }
         };
         loadForm();
-
-        // Adding main button for getting a ticket
-        tg.onEvent('mainButtonClicked', function() {
-            tg.HapticFeedback.impactOccurred('light')
-            // !!!! ADD CHECKING IF EMPTY
-            navigate("/success")
-        })
-
     }, [formId]);
 
-    return (
-        form ? (
-            <div className='form-screen'>
-                <h2 id="main-text">{form.title}</h2>
 
-                <div className="form-block">
-                    {form.fields.map((field, index) => (
-                        <input
-                            key={index}
-                            className="form-input"
-                            type={field.type}
-                            placeholder={field.name}
-                            required
-                        />
-                    ))}
-                </div>
+    // Handler for sending a filled form
+    const handleSendForm = useCallback(async () => {
+        if (!form) return;
+
+        const isEmpty = form.fields.some(field => !formData[field.name]?.trim());
+        if (isEmpty) {
+            tg.showAlert("Пожалуйста, заполните все поля");
+            return;
+        }
+
+        const payload = {
+            user_id: tg.initDataUnsafe.user?.id,
+            form_id: form.id,
+            form_data: formData
+        };
+
+        const isSuccess = await TakeTicket(payload);
+        if (isSuccess) {
+            tg.MainButton.hide()
+            navigate("/success", { state: { title: form.title } });
+        } else {
+            tg.showAlert("Что-то пошло не так, попробуйте позже");
+        }
+    }, [form, formData, formId, navigate]);
+
+
+    // Sending filled form
+    useEffect(() => {
+        const onClick = () => {
+            tg.HapticFeedback.impactOccurred('heavy');
+            handleSendForm();
+        };
+
+        tg.onEvent('mainButtonClicked', onClick);
+        return () => {
+            tg.offEvent('mainButtonClicked', onClick);
+        };
+    }, [handleSendForm]);
+
+
+    // Handling on changing value in some field
+    const handleInputChange = (name: string, value: string) => {
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    return form ? (
+        <div className='form-screen'>
+            <h2 id="main-text">{form.title}</h2>
+
+            <div className="form-block">
+                {form.fields.map((field, index) => (
+                    <input
+                        key={index}
+                        className="form-input"
+                        type={field.type}
+                        placeholder={field.name}
+                        required
+                        value={formData[field.name] || ''}
+                        onChange={e => handleInputChange(field.name, e.target.value)}
+                    />
+                ))}
             </div>
-        ) : (
-            <h1>Loading</h1> // Change
-        )
+        </div>
+    ) : (
+        <Loading/>
     );
 }
 

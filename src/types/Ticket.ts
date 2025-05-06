@@ -16,4 +16,11 @@ export type TicketResponse = {
 export type TicketCheckResponse = {
     title: string,
     is_activated: boolean,
+    variety: string,
 }
+
+export type TicketPayload = {
+    user_id: number;
+    form_id: string | undefined;
+    form_data: { [key: string]: string };
+};

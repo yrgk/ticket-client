@@ -1,27 +1,14 @@
-.form-screen {
-    width: 90vw;
-    margin: auto;
-    margin-top: 5%;
-}
-
-.form-block {
+.check-screen {
     display: flex;
     flex-direction: column;
-    padding-top: 5%;
-    max-width: 500px;
-    margin-top: 10%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
 }
 
-.form-input {
-    background-color: var(--tg-theme-bg-color);
+#title-text {
     color: var(--tg-theme-text-color);
-    border: none;
-    border-radius: 5px;
-    line-height: 3rem;
-    margin-bottom: 5%;
-    padding-left: 10px;
-}
-
-.form-input::placeholder {
-    color: var(--tg-theme-text-color);
+    margin: 5%;
 }
