@@ -9,44 +9,22 @@ import Form from './components/Form/Form';
 import Successful from './components/Successful/Successful';
 import Ticket from './components/Ticket/Ticket';
 import MainPage from './components/MainPage/MainPage';
+import Connector from './components/Connector/Connector';
+import MyProjects from './components/MyProjects/MyProjects';
 
 function App() {
-    // const tg = WebApp;
-    // const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     const startParam = tg.initDataUnsafe?.start_param ?? "";
-
-    //     if (startParam) {
-    //         const startData = startParam.split("_");
-
-    //         switch (startData[0]) {
-    //             case "form":
-    //                 navigate(`/form/${startData[1]}`);
-    //                 break;
-    //             case "ticket":
-    //                 navigate(`/ticket/${startData[1]}`);
-    //                 break;
-    //             case "check":
-    //                 navigate(`/check/${startData[1]}`);
-    //                 break;
-    //             default:
-    //                 navigate("/");
-    //                 break;
-    //         }
-    //     }
-    // }, [navigate]);
-
-
-
     return (
         <BrowserRouter>
         <Routes>
+            {/* Connector page */}
+            <Route index element={<Connector/>}/>
+
             {/* Main page */}
-            <Route index element={<MainPage/>}/>
+            <Route path='main' element={<MainPage/>}/>
 
             {/* My projects page */}
-            <Route path='projects/my' element={<MainPage/>}/>
+            {/* <Route path='projects/my' element={<MyProjects/>}/> */}
+            {/* <Route index element={<MyProjects/>}/> */}
 
             {/* Watching ticket */}
             <Route path='ticket/:ticketId' element={<Ticket/>}/>
