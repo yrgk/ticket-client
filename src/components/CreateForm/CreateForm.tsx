@@ -57,6 +57,16 @@ function CreateForm() {
         tg.MainButton.setText("Создать")
         tg.MainButton.show();
 
+
+        const onBackClick = () => {
+            tg.HapticFeedback.impactOccurred('medium');
+            navigate(-1);
+            tg.BackButton.hide();
+        }
+
+        tg.BackButton.show()
+        tg.onEvent('backButtonClicked', onBackClick)
+
         const handleClick = async () => {
             tg.HapticFeedback.impactOccurred('medium');
             const isSuccessful = await handleSubmit();

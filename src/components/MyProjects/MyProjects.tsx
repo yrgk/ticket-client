@@ -25,7 +25,9 @@ function MyProjects() {
         tg.MainButton.show();
 
         const onClick = () => {
-            tg.HapticFeedback.impactOccurred('medium')
+            tg.HapticFeedback.impactOccurred('medium');
+            tg.MainButton.hide();
+            navigate("/form/create")
         }
 
         tg.onEvent('mainButtonClicked', onClick)
@@ -40,7 +42,7 @@ function MyProjects() {
                 projects ?
                     projects.Forms ?
                         <div className="">
-                            <h3 id='main-text'>Формы регистраций</h3>
+                            <h3 id='project-title-text'>Формы</h3>
                             {projects.Forms.map(
                                 project =>
                                     (

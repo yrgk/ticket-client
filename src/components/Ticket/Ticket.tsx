@@ -3,12 +3,14 @@ import './Ticket.css'
 import { useEffect, useState } from 'react';
 import { TicketResponse } from '../../types/Ticket';
 import { FetchTicket } from '../../utils/ticketFetches';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 function Ticket() {
     const tg = WebApp;
+    const location = useLocation();
+    const navigate = useNavigate();
     const { ticketId } = useParams();
     const [ queryParams ] = useSearchParams();
 
@@ -16,29 +18,48 @@ function Ticket() {
 
     const [ticket, setTicket] = useState<TicketResponse>()
 
-    tg.MainButton.show();
+    const onBack = () => {
+        tg.HapticFeedback.impactOccurred('medium');
+        tg.MainButton.hide();
+        tg.BackButton.hide();
+        navigate(-1);
+    }
+
 
     useEffect(() => {
+        // Init main button
+        tg.MainButton.show();
+
+        if (location.state && location.state.fromOtherPage) {
+            tg.BackButton.show();
+            tg.MainButton.setText("Назад")
+            tg.onEvent('mainButtonClicked', onBack);
+
+        } else {
+            tg.MainButton.setParams({
+                text: `Закрыть`
+            });
+
+            tg.onEvent('mainButtonClicked', function() {
+                tg.HapticFeedback.impactOccurred('medium');
+                tg.close();
+            });
+        }
+
         const loadTicket = async () => {
             if (ticketId) {
-                const data = await FetchTicket(ticketId, userId)
+                const data = await FetchTicket(ticketId, userId);
                 if (data) {
-                    setTicket(data)
+                    setTicket(data);
                 }
             }
-        }
+        };
         loadTicket();
 
-        tg.onEvent('mainButtonClicked', function() {
-            tg.HapticFeedback.impactOccurred('medium')
-            tg.close()
-        })
+
+        tg.onEvent('backButtonClicked', onBack);
 
     }, [ticketId]);
-
-    tg.MainButton.setParams({
-        text: `Закрыть`
-    });
 
     return ticket ? (
         <div className="qr-code-screen">

@@ -1,0 +1,26 @@
+.my-tickets-screen {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: center;
+}
+
+.ticket-base {
+    background-color: var(--tg-theme-section-bg-color);
+    background-color: var(--tg-theme-bg-color);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    width: 35%;
+    max-width: 300px;
+}
+
+.cover-block {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+#ticket-cover {
+    border-radius: 10px;
+    width: 100%;
+}

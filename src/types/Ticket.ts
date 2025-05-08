@@ -13,6 +13,14 @@ export type TicketResponse = {
     is_activated: boolean,
 }
 
+export type MyTicketResponse = {
+    title: string,
+    cover_url: string,
+    ticket_id: string,
+    variety: string,
+    is_activated: boolean,
+}
+
 export type TicketCheckResponse = {
     title: string,
     is_activated: boolean,

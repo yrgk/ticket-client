@@ -11,3 +11,8 @@
 .my-projects-screen {
     padding: 15px;
 }
+
+#project-title-text {
+    color: var(--tg-theme-text-color);
+    margin: 10px;
+}
