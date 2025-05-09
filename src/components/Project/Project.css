@@ -1,0 +1,32 @@
+.project-screen {
+    padding: 15px;
+    max-width: 350px;
+    margin: auto;
+}
+
+.revenue-block {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--tg-theme-section-bg-color);
+    border-radius: 10px;
+}
+
+.revenue {
+    padding: 10px;
+    margin: auto;
+}
+
+.vr {
+    display: inline;
+    height: 45px;
+    margin-top: 10px;
+    border-left: 2px solid var(--tg-theme-section-separator-color);
+}
+
+.project-title-block {
+    text-align: center;
+}
+
+#project-main-text {
+    color: var(--tg-theme-text-color);
+}

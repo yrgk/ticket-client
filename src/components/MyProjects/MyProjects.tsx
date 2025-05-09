@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import './MyProjects.css'
 import WebApp from '@twa-dev/sdk';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MyProjectResponse } from '../../types/ProjectProps';
 import FetchMyProjects from '../../utils/projectFetches';
+import './MyProjects.css';
 
 function MyProjects() {
     const tg = WebApp;
@@ -49,7 +49,8 @@ function MyProjects() {
                                         <div className="project">
                                             <h4 id='main-text'>{project.title}</h4>
                                             {/* Copy link */}
-                                            <h4 id='main-text'>{project.participants_count} / {project.participants_limit} регистраций</h4>
+                                            <h5 id='main-text'>Бесплатная</h5>
+                                            <h5 id='main-text'>{project.participants_count} / {project.participants_limit} регистраций</h5>
                                         </div>
                                     )
                             )}

@@ -12,20 +12,24 @@ import MainPage from './components/MainPage/MainPage';
 import Connector from './components/Connector/Connector';
 import MyProjects from './components/MyProjects/MyProjects';
 import MyTickets from './components/Mytickets/MyTickets';
+import Project from './components/Project/Project';
 
 function App() {
     return (
         <BrowserRouter>
         <Routes>
             {/* Connector page */}
-            {/* <Route index element={<Connector/>}/> */}
+            <Route index element={<Connector/>}/>
 
             {/* Main page */}
             <Route path='main' element={<MainPage/>}/>
 
             {/* My projects page */}
-            <Route path='projects/my' element={<MyProjects/>}/>
+            {/* <Route path='project/my' element={<MyProjects/>}/> */}
             {/* <Route index element={<MyProjects/>}/> */}
+
+            {/* <Route path='project/:id' element={<Project/>}/> */}
+            {/* <Route index element={<Project/>}/> */}
 
             {/* Watching ticket */}
             <Route path='ticket/:ticketId' element={<Ticket/>}/>
@@ -45,7 +49,7 @@ function App() {
 
             {/* My tickets page */}
             {/* <Route path='ticket/my' element={<MyTickets/>}/> */}
-            <Route index element={<MyTickets/>}/>
+            {/* <Route index element={<MyTickets/>}/> */}
 
         </Routes>
         </BrowserRouter>

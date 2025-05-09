@@ -94,11 +94,11 @@ function CreateForm() {
                     style={{backgroundColor: tg.themeParams.secondary_bg_color}}
                 />
 
-                <h4>Лимит регистраций</h4>
+                <h4>Количество билетов</h4>
                 <input
                     type="number"
                     className="form-input"
-                    placeholder="Лимит участников"
+                    placeholder="Количество"
                     value={participantsLimit}
                     style={{backgroundColor: tg.themeParams.secondary_bg_color}}
                     onChange={(e) => setParticipantsLimit(Number(e.target.value))}
