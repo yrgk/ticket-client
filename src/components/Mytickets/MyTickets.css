@@ -1,5 +1,6 @@
 .my-tickets-screen {
     display: flex;
+    max-width: 500px;
     flex-wrap: wrap;
     margin: auto;
     justify-content: center;
@@ -15,6 +16,16 @@
     max-width: 300px;
 }
 
+.not-yet {
+    display: flex;
+    height: 80vh;
+    text-align: center;
+}
+
+.not-yet-block {
+    margin: auto;
+}
+
 .cover-block {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -23,4 +34,22 @@
 #ticket-cover {
     border-radius: 10px;
     width: 100%;
+}
+
+.partner-button {
+    padding: 12px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95vw;
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+
+#button-text {
+    font-weight: 600;
 }

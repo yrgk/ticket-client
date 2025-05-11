@@ -6,6 +6,7 @@ import FetchForm from '../../utils/formFetches';
 import './Form.css';
 import { TakeTicket } from '../../utils/ticketFetches';
 import Loading from '../Loading/Loading';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 function Form() {
     const tg = WebApp;
@@ -65,10 +66,18 @@ function Form() {
             handleSendForm();
         };
 
-        tg.onEvent('mainButtonClicked', onClick);
-        return () => {
-            tg.offEvent('mainButtonClicked', onClick);
-        };
+        if (form?.is_full) {
+            tg.MainButton.setText("Закрыть")
+            tg.onEvent('mainButtonClicked', function() {
+                tg.close();
+            })
+        } else {
+            tg.onEvent('mainButtonClicked', onClick);
+            return () => {
+                tg.offEvent('mainButtonClicked', onClick);
+            };
+        }
+
     }, [handleSendForm]);
 
 
@@ -78,23 +87,51 @@ function Form() {
     };
 
     return form ? (
-        <div className='form-screen'>
-            <h2 id="main-text">{form.title}</h2>
-
-            <div className="form-block">
-                {form.fields.map((field, index) => (
-                    <input
-                        key={index}
-                        className="form-input"
-                        type={field.type}
-                        placeholder={field.name}
-                        required
-                        value={formData[field.name] || ''}
-                        onChange={e => handleInputChange(field.name, e.target.value)}
+        form.is_full ?
+            <div>
+                <div className="full-form-screen">
+                    <DotLottieReact
+                        className='image-check'
+                        src="/_DUCK8_SAD_OUT.json"
+                        loop
+                        autoplay
                     />
-                ))}
+
+                    <h2 id='main-text'>Места закончились</h2>
+                    <h4 id='main-text'>Мы уверены - вы ещё успеете</h4>
+                </div>
             </div>
-        </div>
+        :
+            form.fields.length == 0 ?
+                <div className='full-form-screen'>
+                    <DotLottieReact
+                        className='image-check'
+                        src="/_037_SECURITY_OUT.json"
+                        loop
+                        autoplay
+                    />
+                    <h3 id='main-text'>{form.title}</h3>
+                </div>
+            :
+                <div className='form-screen'>
+                    <h2 id="main-text">{form.title}</h2>
+
+                    <div className="form-block">
+                        {
+                            form.fields.map((field, index) => (
+                                <input
+                                    key={index}
+                                    className="form-input"
+                                    type={field.type}
+                                    placeholder={field.name}
+                                    required
+                                    value={formData[field.name] || ''}
+                                    onChange={e => handleInputChange(field.name, e.target.value)}
+                                />
+                            ))
+                        }
+                    </div>
+                </div>
     ) : (
         <Loading/>
     );

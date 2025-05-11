@@ -13,9 +13,7 @@ function Ticket() {
     const navigate = useNavigate();
     const { ticketId } = useParams();
     const [ queryParams ] = useSearchParams();
-
     const userId = Number(queryParams.get("user_id"))
-
     const [ticket, setTicket] = useState<TicketResponse>()
 
     const onBack = () => {
@@ -34,7 +32,6 @@ function Ticket() {
             tg.BackButton.show();
             tg.MainButton.setText("Назад")
             tg.onEvent('mainButtonClicked', onBack);
-
         } else {
             tg.MainButton.setParams({
                 text: `Закрыть`
@@ -54,12 +51,12 @@ function Ticket() {
                 }
             }
         };
-        loadTicket();
 
+        loadTicket();
 
         tg.onEvent('backButtonClicked', onBack);
 
-    }, [ticketId]);
+    }, [ticketId, location]);
 
     return ticket ? (
         <div className="qr-code-screen">

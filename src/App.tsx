@@ -25,11 +25,10 @@ function App() {
             <Route path='main' element={<MainPage/>}/>
 
             {/* My projects page */}
-            {/* <Route path='project/my' element={<MyProjects/>}/> */}
+            <Route path='project/my' element={<MyProjects/>}/>
             {/* <Route index element={<MyProjects/>}/> */}
 
-            {/* <Route path='project/:id' element={<Project/>}/> */}
-            {/* <Route index element={<Project/>}/> */}
+            <Route path='project/:projectId' element={<Project/>}/>
 
             {/* Watching ticket */}
             <Route path='ticket/:ticketId' element={<Ticket/>}/>
@@ -48,12 +47,11 @@ function App() {
             {/* <Route index element={<Successful/>}/> */}
 
             {/* My tickets page */}
-            {/* <Route path='ticket/my' element={<MyTickets/>}/> */}
+            <Route path='ticket/my' element={<MyTickets/>}/>
             {/* <Route index element={<MyTickets/>}/> */}
-
         </Routes>
         </BrowserRouter>
     )
 }
 
-export default App
+export default App;
