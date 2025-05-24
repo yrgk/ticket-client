@@ -12,4 +12,23 @@ export type FormResponse = {
         name: string;
         type: string;
     }[];
+    varieties: Variety[];
+    layout: {
+        title: string;
+        type: string;
+        schema: {
+            rows: number;
+            stage: string;
+            aisles: number[];
+            columns: number;
+        };
+        // zones: 
+    }
+}
+
+export type Variety = {
+    id: number;
+    title: string;
+    cover_url: string;
+    price: number;
 }

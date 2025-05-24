@@ -39,13 +39,3 @@
 #project-main-text {
     color: var(--tg-theme-text-color);
 }
-
-.full-form-screen {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 90vh;
-    padding: 15px;
-}

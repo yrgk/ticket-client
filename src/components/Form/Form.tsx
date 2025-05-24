@@ -1,7 +1,7 @@
 import WebApp from '@twa-dev/sdk';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FormResponse } from '../../types/FormProps';
+import { FormResponse, Variety } from '../../types/FormProps';
 import FetchForm from '../../utils/formFetches';
 import './Form.css';
 import { TakeTicket } from '../../utils/ticketFetches';
@@ -14,6 +14,7 @@ function Form() {
     const navigate = useNavigate();
     const [form, setForm] = useState<FormResponse | null>(null);
     const [formData, setFormData] = useState<{ [key: string]: string }>({});
+    const [selectedVariety, setSelectedVariety] = useState<Variety>();
 
 
     // Loading form
@@ -30,8 +31,7 @@ function Form() {
             }
         };
         loadForm();
-    }, [formId]);
-
+    }, [formId, tg]);
 
     // Handler for sending a filled form
     const handleSendForm = useCallback(async () => {
@@ -46,7 +46,8 @@ function Form() {
         const payload = {
             user_id: tg.initDataUnsafe.user?.id,
             form_id: form.id,
-            form_data: formData
+            form_data: formData,
+            variety: selectedVariety
         };
 
         const isSuccess = await TakeTicket(payload);
@@ -78,7 +79,7 @@ function Form() {
             };
         }
 
-    }, [handleSendForm]);
+    }, [handleSendForm, selectedVariety]);
 
 
     // Handling on changing value in some field
@@ -86,8 +87,17 @@ function Form() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleVarietySelect = (variety: any) => {
+        setSelectedVariety(variety);
+        setTimeout(() => {
+            tg.MainButton.setText(`Далее | ${variety.price}₽ · ${variety.title}`);
+            tg.MainButton.show();
+        }, 50)
+    };
+
     return form ? (
         form.is_full ?
+            // full form
             <div>
                 <div className="full-form-screen">
                     <DotLottieReact
@@ -97,22 +107,59 @@ function Form() {
                         autoplay
                     />
 
-                    <h2 id='main-text'>Места закончились</h2>
+                    <h2 id='main-text'>Билеты закончились</h2>
                     <h4 id='main-text'>Мы уверены - вы ещё успеете</h4>
                 </div>
             </div>
         :
             form.fields.length == 0 ?
-                <div className='full-form-screen'>
-                    <DotLottieReact
-                        className='image-check'
-                        src="/_037_SECURITY_OUT.json"
-                        loop
-                        autoplay
-                    />
-                    <h3 id='main-text'>{form.title}</h3>
-                </div>
+                form.varieties.length == 0 ?
+                    form.layout.schema == null ?
+                        // Without fields an hall layout
+                        <div className='full-form-screen'>
+                                <DotLottieReact
+                                    className='image-check'
+                                    src="/_037_SECURITY_OUT.json"
+                                    loop
+                                    autoplay
+                                    />
+                                <h3 id='main-text'>{form.title}</h3>
+                            </div>
+                    :
+                        // Hall layout
+                        <div className='form-screen'>
+                            <h2 id="main-text">{form.title}</h2>
+
+                        </div>
+                :
+                    // Main form
+                    <>
+                        <div className='full-form-variety-screen'>
+                            <DotLottieReact
+                                className='image-check'
+                                src="/_037_SECURITY_OUT.json"
+                                loop
+                                autoplay
+                                />
+                            <h3 id='main-text'>{form.title}</h3>
+                        </div>
+
+                        <div className="variety-scroll-container">
+                            {form.varieties.map((variety) => (
+                                <div
+                                    key={variety.id}
+                                    className={`variety-card ${selectedVariety?.id === variety.id ? 'selected' : ''}`}
+                                    onClick={() => handleVarietySelect(variety)}
+                                >
+                                    <img src={variety.cover_url} alt={variety.title} className="variety-image" />
+                                    <h4 className="variety-title">{variety.title}</h4>
+                                    <h4 className="variety-price">{variety.price}₽</h4>
+                                </div>
+                            ))}
+                        </div>
+                    </>
             :
+                // Form with fields
                 <div className='form-screen'>
                     <h2 id="main-text">{form.title}</h2>
 

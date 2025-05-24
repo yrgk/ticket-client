@@ -1,22 +1,24 @@
-import WebApp from '@twa-dev/sdk';
-import './MyTickets.css'
-import { useEffect, useState } from 'react';
-import { FetchMyTickets } from '../../utils/ticketFetches';
-import { MyTicketResponse } from '../../types/Ticket';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import WebApp from '@twa-dev/sdk';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { MyTicketResponse } from '../../types/Ticket';
+import { FetchMyTickets } from '../../utils/ticketFetches';
+import './MyTickets.css';
 
 function MyTickets() {
     const tg = WebApp;
     const navigate = useNavigate();
     const location = useLocation();
     const userId = tg.initDataUnsafe.user?.id;
+    const [isLoading, setIsLoading] = useState(false);
     const [tickets, setTickets] = useState<MyTicketResponse[] | null>(null);
 
     useEffect(() => {
         const loadMyTickets = async () => {
             if (userId) {
                 const data = await FetchMyTickets(userId ?? 0)
+                setIsLoading(true)
                 if (data) {
                     setTickets(data)
                 }
@@ -24,12 +26,6 @@ function MyTickets() {
         }
         loadMyTickets();
 
-        tg.MainButton.show();
-        tg.MainButton.setText("Меню партнёра");
-        tg.onEvent('mainButtonClicked', function() {
-            tg.MainButton.hide();
-            navigate("main");
-        })
     }, [userId, navigate, location]);
 
     const onTicketClick = (ticketId: string) => {
@@ -37,9 +33,15 @@ function MyTickets() {
         navigate(`/ticket/${ticketId}?user_id=${userId}`, { state: { fromOtherPage: true } })
     }
 
+    if (!isLoading) {
+        // return <Loading/>
+        return <></>
+    }
+
     return (
         <>
             <div className="my-tickets-screen">
+            {/* <h1 id='main-tickets-text'>Мои билеты</h1> */}
                 {
                     tickets ?
                         <>
@@ -52,7 +54,8 @@ function MyTickets() {
                                             onClick={() => onTicketClick(ticket.ticket_id)}
                                         >
                                             <div className="cover-block">
-                                                <img id='ticket-cover' src="https://cdn.vectorstock.com/i/500p/42/43/admission-ticket-emoji-icon-access-vector-55454243.jpg" alt="" />
+                                                <img id='ticket-cover' src={ticket.cover_url} alt="" />
+                                                <div className="cover-text">#{ticket.ticket_number}</div>
                                             </div>
                                             {
                                                 ticket.title.length > 60 ?

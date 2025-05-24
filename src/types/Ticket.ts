@@ -8,7 +8,10 @@ export type TicketProps = {
 export type TicketResponse = {
     title: string,
     qr_code_url: string,
+    cover_url: string;
     form_id: number,
+    ticket_number: number;
+    participants_limit: number;
     variety: string,
     is_activated: boolean,
 }
@@ -17,6 +20,8 @@ export type MyTicketResponse = {
     title: string,
     cover_url: string,
     ticket_id: string,
+    ticket_number: number;
+    participants_limit: number;
     variety: string,
     is_activated: boolean,
 }

@@ -4,6 +4,16 @@
     margin-top: 5%;
 }
 
+.full-form-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    padding: 15px;
+}
+
 .form-block {
     display: flex;
     flex-direction: column;
@@ -24,4 +34,65 @@
 
 .form-input::placeholder {
     color: var(--tg-theme-text-color);
+}
+
+.full-form-variety-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 40vh;
+    padding: 15px;
+}
+
+.variety-scroll-container {
+    display: flex;
+    margin: 10px;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 12px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+}
+
+.variety-scroll-container:active {
+    cursor: grabbing;
+}
+
+.variety-card {
+    flex: 0 0 auto;
+    width: 40vw;
+    max-width: 150px;
+    border-radius: 12px;
+    background-color: var(--tg-theme-section-bg-color, #f0f0f0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    scroll-snap-align: start;
+    text-align: center;
+    user-select: none;
+}
+
+.variety-card.selected {
+    background-color: #f0faff;
+    transition: 0.2s;
+}
+
+.variety-image {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.variety-title {
+    font-size: 14px;
+    margin: 0;
+    color: var(--tg-theme-text-color, #000);
+}
+
+.variety-price {
+    margin: 4px 0 0;
+    color: var(--tg-theme-hint-color, #888);
 }
