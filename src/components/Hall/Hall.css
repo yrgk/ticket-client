@@ -1,0 +1,8 @@
+/* .seat {
+    width: '30px';
+    height: '30px';
+    backgroundColor: isAisle ? 'transparent' : '#ccc';
+    display: 'flex';
+    justifyContent: 'center';
+    alignItems: 'center';
+} */

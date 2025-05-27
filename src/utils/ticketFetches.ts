@@ -31,6 +31,20 @@ export async function FetchCheckTicket(ticketId: string, validatorId: number): P
 }
 
 
+// export async function TakeTicket(payload: any): Promise<string> {
+//     const url = "https://vellem.catalogio.space/api/v1/ticket"
+
+//     try {
+//         const response = await axios.post(url, payload)
+//         if (response.status != 200) {
+//             return response.data
+//         } else {
+//             return response.data
+//         }
+//     } catch(error) {
+//         return error.response.data
+//     }
+// }
 export async function TakeTicket(payload: any): Promise<boolean> {
     const url = "https://vellem.catalogio.space/api/v1/ticket"
 

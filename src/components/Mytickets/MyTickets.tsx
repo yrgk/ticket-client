@@ -5,12 +5,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { MyTicketResponse } from '../../types/Ticket';
 import { FetchMyTickets } from '../../utils/ticketFetches';
 import './MyTickets.css';
+// import Loading from '../Loading/Loading';
 
 function MyTickets() {
     const tg = WebApp;
     const navigate = useNavigate();
     const location = useLocation();
     const userId = tg.initDataUnsafe.user?.id;
+    // const userId = 123
     const [isLoading, setIsLoading] = useState(false);
     const [tickets, setTickets] = useState<MyTicketResponse[] | null>(null);
 
@@ -45,6 +47,7 @@ function MyTickets() {
                 {
                     tickets ?
                         <>
+                            <h2 id='main-tickets-text'>Мои билеты</h2>
                             {
                                 tickets.map(
                                     (ticket) => (

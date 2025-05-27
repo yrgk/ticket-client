@@ -96,3 +96,8 @@
     margin: 4px 0 0;
     color: var(--tg-theme-hint-color, #888);
 }
+
+.layout {
+    background-color: var(--tg-theme-bg-color);
+
+}

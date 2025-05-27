@@ -25,7 +25,7 @@ function App() {
             <Route path='main' element={<MainPage/>}/>
 
             {/* My projects page */}
-            <Route path='project/my' element={<MyProjects/>}/>
+            <Route path='core' element={<MyProjects/>}/>
             {/* <Route index element={<MyProjects/>}/> */}
 
             <Route path='project/:projectId' element={<Project/>}/>

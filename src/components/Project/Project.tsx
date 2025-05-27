@@ -28,14 +28,15 @@ function Project() {
             />
 
             <div className='project-title-block'>
-                <h2 id='project-main-text'>Мастер класс по жарке стейка рибай</h2>
+                <h2 id='project-main-text'>Рассказы А.П. Чехова в театре на воде</h2>
             </div>
 
             {/* Separator */}
             <div style={{height: "20px"}}></div>
 
             <div className="all-revenue-block">
-                <h2 id='main-text'>786 502₽<h5>Общий доход</h5></h2>
+                <h1 id='main-text'>286 507₽</h1>
+                <h4>Общий доход</h4>
             </div>
 
             {/* Separator */}

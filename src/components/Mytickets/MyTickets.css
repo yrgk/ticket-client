@@ -1,6 +1,7 @@
 #main-tickets-text {
     width: 100%;
     text-align: center;
+    margin: 10px;
     color: var(--tg-theme-text-color);
 }
 

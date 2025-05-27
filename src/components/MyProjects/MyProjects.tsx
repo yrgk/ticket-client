@@ -59,17 +59,56 @@ function MyProjects() {
         return () => {
             tg.offEvent('mainButtonClicked', onClick);
         };
-    })
+    }, [])
 
     return (
         <div className="my-projects-screen">
             {
                 isLoading ?
-                    <Loading/>
+                    <></>
                 :
                     projects ?
                         projects.Forms ?
-                            <div className="">
+                            <div className="my-projects-block">
+
+                                <div className="choose-org">
+                                    <h3 id='main-text'>Super Events ✨</h3>
+                                </div>
+
+                                {/* Block at the top of page with revenue */}
+                                <div className="my-projects-revenue">
+                                    <div style={{height: "40px"}}></div>
+                                    <h1 id='main-text'>1 286 507₽</h1>
+                                    {/* <h4 id='main-text'>Общий доход</h4> */}
+
+                                    <div style={{height: "30px"}}></div>
+
+                                    <div className='stat-selector'>
+                                        <h4 id='main-text' style={{backgroundColor: 'var(--tg-theme-secondary-bg-color)', borderRadius: '15px'}}>Сегодня</h4>
+                                        <h4 id='main-text'>Неделя</h4>
+                                    </div>
+
+                                    <div style={{height: "10px"}}></div>
+
+
+                                    <div className="all-stats">
+                                        <div className="main-stat">
+                                            <h4 id="main-text">Доход</h4>
+                                            <h4 id="main-text">11 084₽</h4>
+                                        </div>
+
+                                        <div className="vr"></div>
+
+                                        <div className="main-stat">
+                                            <h4 id="main-text">Регистраций</h4>
+                                            <h4 id="main-text">68</h4>
+                                        </div>
+
+                                    </div>
+
+                                    <div style={{height: "20px"}}></div>
+                                </div>
+
                                 <h3 id='project-title-text'>События</h3>
                                 {projects.Forms.map(
                                     project =>

@@ -13,7 +13,7 @@
 
 .all-revenue-block {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: var(--tg-theme-section-bg-color);
     border-radius: 10px;
     padding: 10px;

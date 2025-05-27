@@ -7,6 +7,7 @@ import './Form.css';
 import { TakeTicket } from '../../utils/ticketFetches';
 import Loading from '../Loading/Loading';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Hall from '../Hall/Hall';
 
 function Form() {
     const tg = WebApp;
@@ -46,8 +47,8 @@ function Form() {
         const payload = {
             user_id: tg.initDataUnsafe.user?.id,
             form_id: form.id,
-            form_data: formData,
-            variety: selectedVariety
+            // form_data: formData,
+            // variety: selectedVariety
         };
 
         const isSuccess = await TakeTicket(payload);
@@ -58,7 +59,6 @@ function Form() {
             tg.showAlert("Что-то пошло не так, попробуйте позже");
         }
     }, [form, formData, formId, navigate]);
-
 
     // Sending filled form
     useEffect(() => {
@@ -115,21 +115,28 @@ function Form() {
             form.fields.length == 0 ?
                 form.varieties.length == 0 ?
                     form.layout.schema == null ?
-                        // Without fields an hall layout
+                        // Without fields and hall layout
                         <div className='full-form-screen'>
-                                <DotLottieReact
-                                    className='image-check'
-                                    src="/_037_SECURITY_OUT.json"
-                                    loop
-                                    autoplay
-                                    />
-                                <h3 id='main-text'>{form.title}</h3>
-                            </div>
+                            <DotLottieReact
+                                className='image-check'
+                                src="/_037_SECURITY_OUT.json"
+                                loop
+                                autoplay
+                                />
+                            <h3 id='main-text'>{form.title}</h3>
+                        </div>
                     :
                         // Hall layout
                         <div className='form-screen'>
                             <h2 id="main-text">{form.title}</h2>
-
+                            <div className="layout">
+                                <Hall
+                                    rows={form.layout.schema.rows}
+                                    columns={form.layout.schema.columns}
+                                    aisles={form.layout.schema.aisles}
+                                    // aisles={[]}
+                                />
+                            </div>
                         </div>
                 :
                     // Main form
