@@ -47,8 +47,8 @@ function Form() {
         const payload = {
             user_id: tg.initDataUnsafe.user?.id,
             form_id: form.id,
-            // form_data: formData,
-            // variety: selectedVariety
+            form_data: formData,
+            variety: selectedVariety
         };
 
         const isSuccess = await TakeTicket(payload);

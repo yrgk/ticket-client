@@ -1,11 +1,25 @@
 .project {
-    background-color: var(--tg-theme-section-bg-color);
-    border-radius: 15px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px;
     padding: 15px;
     max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.project-text-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-text-block h5 {
+    color: var(--tg-theme-subtitle-text-color);;
+}
+
+.project-list {
+    background-color: var(--tg-theme-section-bg-color);
+    border-radius: 20px;
 }
 
 .my-projects-screen {
