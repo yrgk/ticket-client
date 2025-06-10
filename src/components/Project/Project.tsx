@@ -1,14 +1,15 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import './Project.css'
 import WebApp from '@twa-dev/sdk';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+// import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 function Project() {
     const tg = WebApp;
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
-    const { projectId } = useParams();
+    // const { projectId } = useParams();
 
     useEffect(() => {
         tg.BackButton.show();
