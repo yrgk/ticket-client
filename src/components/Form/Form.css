@@ -75,7 +75,8 @@
 }
 
 .variety-card.selected {
-    background-color: #f0faff;
+    /* background-color: #f0faff; */
+    background-color: var(--tg-theme-secondary-bg-color);
     transition: 0.2s;
 }
 
